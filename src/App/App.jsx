@@ -6,6 +6,9 @@ import { authenticationService } from '@/_services';
 import { PrivateRoute } from '@/_components';
 import { HomePage } from '@/HomePage';
 import { LoginPage } from '@/LoginPage';
+import PersonPinIcon from '@material-ui/icons/PersonPin';
+import { withTheme } from '@material-ui/core';
+
 
 class App extends React.Component {
     constructor(props) {
@@ -35,6 +38,7 @@ class App extends React.Component {
                             <div className="navbar-nav">
                                 <Link to="/" className="nav-item nav-link">Home</Link>
                                 <a onClick={this.logout} className="nav-item nav-link">Logout</a>
+                                <PersonPinIcon style={{color: "white"}} fontSize="large"/>
                             </div>
                         </nav>
                     }
