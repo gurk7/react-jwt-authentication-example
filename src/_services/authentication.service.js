@@ -19,11 +19,11 @@ function login(username, password) {
         body: JSON.stringify({ username, password })
     };
 
-    return fetch(`${config.apiUrl}/login/mongo`, requestOptions)
+    return fetch(`${config.apiUrl}/login/activeDirectory`, requestOptions)
         .then(handleResponse)
         .then(user => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('currentUser', JSON.stringify(user.token));
+            localStorage.setItem('currentUser', JSON.stringify({"token": user.token}));
             currentUserSubject.next(user);
 
             return user;
