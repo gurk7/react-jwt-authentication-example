@@ -3,11 +3,12 @@ import { Router, Route, Link } from 'react-router-dom';
 
 import { history } from '@/_helpers';
 import { authenticationService } from '@/_services';
+import { userService } from '@/_services';
 import { PrivateRoute } from '@/_components';
 import { HomePage } from '@/HomePage';
 import { LoginPage } from '@/LoginPage';
+import { UserInformationPage }  from '@/UserInformationPage';
 import PersonPinIcon from '@material-ui/icons/PersonPin';
-import { withTheme } from '@material-ui/core';
 
 
 class App extends React.Component {
@@ -15,7 +16,7 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            currentUser: null
+            currentUser: null,
         };
     }
 
@@ -25,7 +26,11 @@ class App extends React.Component {
 
     logout() {
         authenticationService.logout();
+        userService.logout();
         history.push('/login');
+    }
+    getUserInformation(){
+        history.push('/userInformation');
     }
 
     render() {
@@ -38,7 +43,7 @@ class App extends React.Component {
                             <div className="navbar-nav">
                                 <Link to="/" className="nav-item nav-link">Home</Link>
                                 <a onClick={this.logout} className="nav-item nav-link">Logout</a>
-                                <PersonPinIcon style={{color: "white"}} fontSize="large"/>
+                                <PersonPinIcon style={{color: "white"}} fontSize="large" onClick={this.getUserInformation}/>
                             </div>
                         </nav>
                     }
@@ -48,6 +53,7 @@ class App extends React.Component {
                                 <div className="col-md-6 offset-md-3">
                                     <PrivateRoute exact path="/" component={HomePage} />
                                     <Route path="/login" component={LoginPage} />
+                                    <Route path="/userInformation" component={UserInformationPage} />
                                 </div>
                             </div>
                         </div>

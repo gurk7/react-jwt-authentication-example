@@ -7,7 +7,6 @@ class HomePage extends React.Component {
         super(props);
 
         this.state = {
-            currentUser: authenticationService.currentUserValue,
             userInformation: null
         };
     }
@@ -19,12 +18,16 @@ class HomePage extends React.Component {
     render() {
         const { userInformation } = this.state;
         return (
-            (userInformation &&
             <div>
-                <h1>Hi {userInformation.firstName}!</h1>
-                <p>You're logged in with React & JWT!!</p>
-            </div>)
-        );
+                <div>welcome!</div>
+                {userInformation &&
+                    <div>
+                        <h1>Hi {userInformation.firstName}!</h1>
+                        <p>You're logged in with React & JWT!!</p>
+                    </div>
+                }
+            </div>
+        )
     }
 }
 
