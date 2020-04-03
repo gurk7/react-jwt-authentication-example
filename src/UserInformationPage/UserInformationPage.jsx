@@ -20,10 +20,13 @@ class UserInformationPage extends React.Component {
         const { userInformation } = this.state;
         return (
             <div>
-                {userInformation &&
+                {userInformation &&               
                     <div>
-                        <h1>{userInformation.firstName}!</h1>
-                        <h1>{userInformation.lastName}</h1>
+                        <h1>view your user information</h1>
+                        <h4>First Name: {userInformation.firstName}</h4>
+                        <h4>Last Name: {userInformation.lastName}</h4>
+                        <h4>email: {userInformation.email}</h4>
+                        <h4>groups: {userInformation.groups}</h4>
                     </div>
                 }
             </div>

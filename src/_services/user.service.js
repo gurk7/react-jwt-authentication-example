@@ -8,6 +8,7 @@ export const currentUserInformationSubject = new BehaviorSubject(JSON.parse(loca
 export const userService = {
     getUserInformation,
     logout,
+    currentUserInformation: currentUserInformationSubject.asObservable(),
     get currentUserInformationValue () { return currentUserInformationSubject.value }
 };
 

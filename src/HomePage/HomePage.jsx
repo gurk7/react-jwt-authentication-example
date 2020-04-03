@@ -12,7 +12,16 @@ class HomePage extends React.Component {
     }
 
     componentDidMount() {
-        userService.getUserInformation().then(userInformation => this.setState({ userInformation: userInformation }));
+        this.userInformation = userService.currentUserInformationValue;
+        if(this.userInformation == null)
+        {
+            userService.getUserInformation().then(userInformation => this.setState({ userInformation: userInformation }));
+        }
+        else
+        {
+            this.setState({userInformation: this.userInformation});
+        }
+
     }
 
     render() {
