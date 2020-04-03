@@ -9,6 +9,7 @@ import { HomePage } from '@/HomePage';
 import { LoginPage } from '@/LoginPage';
 import { UserInformationPage }  from '@/UserInformationPage';
 import PersonPinIcon from '@material-ui/icons/PersonPin';
+import { Tooltip } from '@material-ui/core';
 
 
 class App extends React.Component {
@@ -41,9 +42,11 @@ class App extends React.Component {
                     {currentUser &&
                         <nav className="navbar navbar-expand navbar-dark bg-dark">
                             <div className="navbar-nav">
+                                <Tooltip title="User Information">
+                                    <PersonPinIcon style={{color: "white", cursor: 'pointer'}} fontSize="large" onClick={this.getUserInformation}/>
+                                </Tooltip>
                                 <Link to="/" className="nav-item nav-link">Home</Link>
                                 <a onClick={this.logout} className="nav-item nav-link">Logout</a>
-                                <PersonPinIcon style={{color: "white", cursor: 'pointer'}} fontSize="large" onClick={this.getUserInformation}/>
                             </div>
                         </nav>
                     }
