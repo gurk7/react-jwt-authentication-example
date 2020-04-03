@@ -23,10 +23,11 @@ class UserInformationPage extends React.Component {
                 {userInformation &&               
                     <div>
                         <h1>view your user information</h1>
-                        <h4>First Name: {userInformation.firstName}</h4>
-                        <h4>Last Name: {userInformation.lastName}</h4>
-                        <h4>email: {userInformation.email}</h4>
-                        <h4>groups: {userInformation.groups}</h4>
+                        <p></p>
+                        <p>First Name: {userInformation.firstName}</p>
+                        <p>Last Name: {userInformation.lastName}</p>
+                        <p>email: {userInformation.email}</p>
+                        <p>groups: {userInformation.groups}</p>
                     </div>
                 }
             </div>

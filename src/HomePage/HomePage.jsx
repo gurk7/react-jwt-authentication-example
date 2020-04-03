@@ -28,7 +28,6 @@ class HomePage extends React.Component {
         const { userInformation } = this.state;
         return (
             <div>
-                <div>welcome!</div>
                 {userInformation &&
                     <div>
                         <h1>Hi {userInformation.firstName}!</h1>
