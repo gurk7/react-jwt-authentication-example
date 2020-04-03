@@ -43,7 +43,7 @@ class App extends React.Component {
                             <div className="navbar-nav">
                                 <Link to="/" className="nav-item nav-link">Home</Link>
                                 <a onClick={this.logout} className="nav-item nav-link">Logout</a>
-                                <PersonPinIcon style={{color: "white"}} fontSize="large" onClick={this.getUserInformation}/>
+                                <PersonPinIcon style={{color: "white", cursor: 'pointer'}} fontSize="large" onClick={this.getUserInformation}/>
                             </div>
                         </nav>
                     }
