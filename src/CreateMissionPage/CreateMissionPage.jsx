@@ -9,7 +9,8 @@ class CreateMissionPage extends React.Component {
         super(props);
 
         this.state = {
-            currentUser: null
+            currentUser: null,
+            response: null
         };
     }
 
@@ -18,8 +19,13 @@ class CreateMissionPage extends React.Component {
         this.setState({currentUser: this.currentUser});
     }
 
+    handleResponse(response)
+    {
+        this.setState({response: response});
+    }
+
     render() {
-        const { currentUser } = this.state;
+        const { currentUser, response } = this.state;
         return (
             <div>
                 <h1>Create a Mission!</h1>
@@ -38,7 +44,8 @@ class CreateMissionPage extends React.Component {
                             missionService.createMission({missionName, priority})
                                 .then(
                                     response => {
-                                        (<p1>response: {response.message}</p1>)
+                                        setSubmitting(false);
+                                        this.handleResponse(response);
                                     },
                                     error => {
                                         setSubmitting(false);
@@ -70,6 +77,13 @@ class CreateMissionPage extends React.Component {
                             </Form>
                         )}
                     />
+                }
+                {response && 
+                    <div>
+                        <h4>Response</h4>
+                        <p>success: {`${response.success}`}</p>
+                        <p>message: {response.message}</p>
+                    </div>
                 }
             </div>
         );
