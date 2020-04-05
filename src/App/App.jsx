@@ -8,6 +8,7 @@ import { PrivateRoute } from '@/_components';
 import { HomePage } from '@/HomePage';
 import { LoginPage } from '@/LoginPage';
 import { UserInformationPage }  from '@/UserInformationPage';
+import { CreateMissionPage } from '@/CreateMissionPage';
 import PersonPinIcon from '@material-ui/icons/PersonPin';
 import { Tooltip } from '@material-ui/core';
 
@@ -45,6 +46,7 @@ class App extends React.Component {
                                 <Tooltip title="User Information">
                                     <PersonPinIcon style={{color: "white", cursor: 'pointer'}} fontSize="large" onClick={this.getUserInformation}/>
                                 </Tooltip>
+                                <Link to="/createMission" className="nav-item nav-link">Mission</Link>
                                 <Link to="/" className="nav-item nav-link">Home</Link>
                                 <a onClick={this.logout} className="nav-item nav-link">Logout</a>
                             </div>
@@ -57,6 +59,7 @@ class App extends React.Component {
                                     <PrivateRoute exact path="/" component={HomePage} />
                                     <Route path="/login" component={LoginPage} />
                                     <Route path="/userInformation" component={UserInformationPage} />
+                                    <Route path="/createMission" component={CreateMissionPage} />
                                 </div>
                             </div>
                         </div>
