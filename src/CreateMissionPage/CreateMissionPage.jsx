@@ -45,11 +45,13 @@ class CreateMissionPage extends React.Component {
                                 .then(
                                     response => {
                                         setSubmitting(false);
-                                        this.handleResponse(response);
+                                        if(response.success)
+                                        {
+                                            this.handleResponse(response);
+                                        }
                                     },
                                     error => {
-                                        setSubmitting(false);
-                                        setStatus(error);
+                                        console.log(error);
                                     }
                                 );
                         }}
