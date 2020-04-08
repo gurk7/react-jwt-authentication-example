@@ -1,6 +1,8 @@
 import React from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import {Popup, Button} from "semantic-ui-react";
+import { history } from '@/_helpers';
 
 import { authenticationService, missionService } from '@/_services';
 
@@ -10,7 +12,8 @@ class CreateMissionPage extends React.Component {
 
         this.state = {
             currentUser: null,
-            response: null
+            response: null,
+            popUp: false
         };
     }
 
@@ -19,13 +22,22 @@ class CreateMissionPage extends React.Component {
         this.setState({currentUser: this.currentUser});
     }
 
-    handleResponse(response)
-    {
+    handleResponse(response){
         this.setState({response: response});
     }
 
+    handleError(error){
+        console.log(error);
+        this.setState({popUp: true});
+    }
+
+    logout()
+    {
+        history.push('/login');
+    }
+
     render() {
-        const { currentUser, response } = this.state;
+        const { currentUser, response, popUp } = this.state;
         return (
             <div>
                 <h1>Create a Mission!</h1>
@@ -52,6 +64,8 @@ class CreateMissionPage extends React.Component {
                                     },
                                     error => {
                                         console.log(error);
+                                        this.handleError(error);
+                                        //alert("please log in to perform this act");
                                     }
                                 );
                         }}
@@ -68,10 +82,27 @@ class CreateMissionPage extends React.Component {
                                     <ErrorMessage name="priority" component="div" className="invalid-feedback" />
                                 </div>
                                 <div className="form-group">
-                                    <button type="submit" className="btn btn-primary" disabled={isSubmitting}>Create</button>
-                                    {isSubmitting &&
-                                        <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                                <Popup style={{backgroundColor: 'white', width:'1000px', height:'100px'}}
+                                    trigger={<Button type="submit" className="btn btn-primary" disabled={isSubmitting}>Create</Button>}
+                                    content={
+                                    <div style={{display: "flex",
+                                                alignContent: "center",
+                                                flexDirection: "column",
+                                                alignItems: "center"}}>
+                                        <h1>please log in to perform this act</h1>
+                                        <button className="btn btn-primary" style={{display: "flex",
+                                            justifyContent: "center",
+                                            alignItems: "center"}} 
+                                        onClick={this.logout}>Ok</button>
+                                    </div>
                                     }
+                                    on='click'
+                                    open={popUp}
+                                    position='top center'
+                                    />
+                                {isSubmitting &&
+                                    <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                                }
                                 </div>
                                 {status &&
                                     <div className={'alert alert-danger'}>{status}</div>
