@@ -44,7 +44,9 @@ class App extends React.Component {
                         <nav className="navbar navbar-expand navbar-dark bg-dark">
                             <div className="navbar-nav">
                                 <Tooltip title="User Information">
-                                    <PersonPinIcon style={{color: "white", cursor: 'pointer'}} fontSize="large" onClick={this.getUserInformation}/>
+                                    <PersonPinIcon style={{color: "white", cursor: 'pointer'}} 
+                                    fontSize="large" 
+                                    onClick={this.getUserInformation}/>
                                 </Tooltip>
                                 <Link to="/createMission" className="nav-item nav-link">Mission</Link>
                                 <Link to="/" className="nav-item nav-link">Home</Link>

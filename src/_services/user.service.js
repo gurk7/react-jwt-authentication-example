@@ -17,7 +17,12 @@ function getUserInformation() {
     
     return fetch(`${config.apiUrl}/user/information`, requestOptions).then(handleResponse)
     .then(userInformation => {
-        localStorage.setItem('userInformation', JSON.stringify({userInformation}));
+        localStorage.setItem('userInformation', 
+        JSON.stringify({"firstName": userInformation.firstName, 
+            "lastName": userInformation.lastName,
+            "email": userInformation.email,
+            "groups": userInformation.groups}
+            ));
         currentUserInformationSubject.next(userInformation);
 
         return userInformation;
