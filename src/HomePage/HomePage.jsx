@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { userService, authenticationService } from '@/_services';
+import { userService } from '@/_services';
 
 class HomePage extends React.Component {
     constructor(props) {
@@ -9,18 +9,11 @@ class HomePage extends React.Component {
         this.state = {
             userInformation: null
         };
-
-        if(this.userInformation == null)
-        {
-            userService.getUserInformation().then(userInformation => this.setState({ userInformation: userInformation }));
-        }
-        else
-        {
-            this.setState({userInformation: this.userInformation});
-        }
     }
 
     componentDidMount() {
+        this.userInformation = userService.currentUserInformationValue;
+        this.setState({userInformation: this.userInformation});
     }
 
     render() {

@@ -3,6 +3,8 @@ import { BehaviorSubject } from 'rxjs';
 import config from 'config';
 import { handleResponse } from '@/_helpers';
 
+import { userService } from '@/_services';
+
 const currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('currentUser')));
 
 export const authenticationService = {
@@ -27,7 +29,8 @@ function login(username, password) {
             currentUserSubject.next(user);
 
             return user;
-        });
+        })
+        .then(() => userService.getUserInformation());
 }
 
 function logout() {
